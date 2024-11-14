@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
               unselectedLabelColor: Colors.red[200],
               labelColor: const Color.fromARGB(255, 255, 170, 106),
               tabs: const [
-                Tab(text: 'Informacion durante del embarazo'),
+                Tab(text: 'uiiuolkaslkadsdsds'),
                 Tab(text: 'Informacion Despues del Embarazo'),
                 Tab(text: 'Calendario')
               ]),
