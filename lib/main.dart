@@ -177,61 +177,100 @@ class InfoDespuesTab extends StatelessWidget{
   }
 }
 
-class CalendarioTab extends StatefulWidget{
+class CalendarioTab extends StatefulWidget {
   const CalendarioTab({super.key});
 
   @override
   _CalendarioTabState createState() => _CalendarioTabState();
-  
 }
 
-class _CalendarioTabState extends State<CalendarioTab>{
+class _CalendarioTabState extends State<CalendarioTab> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  List<String> _notas = [];
 
   @override
-  Widget build(BuildContext context){ //desarrollo del calendario a futuro
+  void initState() {
+    super.initState();
+    //Esto a futuro usar la base de datos que dara el ing, solo para fines practicos ahora
+    _notas = [ //el tamaño del string indica cual es la cantidad de notas
+      'Revisión médica',
+      'Clase de preparación',
+      'Comprar artículos esenciales',
+      'Comprar artículos esencialesss'
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: 
-        TableCalendar(
-          firstDay: DateTime(DateTime.now().year, 1, 1),
-          lastDay: DateTime(DateTime.now().year + 2000, 12, 31),
-          focusedDay: _focusedDay,
-          calendarFormat: CalendarFormat.month,
-          startingDayOfWeek: StartingDayOfWeek.sunday,
-          onDaySelected: (selectedDay, focusedDay){
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-          },
-          selectedDayPredicate: (day){
-            return isSameDay(_selectedDay, day);
-          },
-          calendarStyle: CalendarStyle(
-            todayDecoration: BoxDecoration(
-              color: Colors.blue[200],
-              shape: BoxShape.circle
+      appBar: AppBar(
+        title: const Text("Calendario con Notas"),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          // Calendario
+          TableCalendar(
+            firstDay: DateTime(DateTime.now().year, 1, 1),
+            lastDay: DateTime(DateTime.now().year + 5, 12, 31),
+            focusedDay: _focusedDay,
+            calendarFormat: CalendarFormat.month,
+            startingDayOfWeek: StartingDayOfWeek.sunday,
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+            },
+            selectedDayPredicate: (day) {
+              return isSameDay(_selectedDay, day);
+            },
+            calendarStyle: CalendarStyle(
+              todayDecoration: BoxDecoration(
+                color: Colors.blue[200],
+                shape: BoxShape.circle,
+              ),
+              selectedDecoration: BoxDecoration(
+                color: Colors.pink[200],
+                shape: BoxShape.circle,
+              ),
             ),
-            selectedDecoration: BoxDecoration(
-              color: Colors.pink[200],
-              shape: BoxShape.circle,
-            )
+            headerStyle: const HeaderStyle(
+              formatButtonVisible: false,
+              titleCentered: true,
+            ),
           ),
-          headerStyle: const HeaderStyle(
-            formatButtonVisible: false,
-            titleCentered: true,
+          const SizedBox(height: 16),
+
+          // Lista de Notas
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              itemCount: _notas.length, // Cambiar por datos dinamicos de la base de datos en un futuro
+              itemBuilder: (BuildContext context, int index) {
+                return _buildNoteCard(context, index);
+              },
+            ),
           ),
-        )
+        ],
       ),
     );
   }
-//agregar cards de las notas creadas por el usuario
+
+  // Card de nota
+  Widget _buildNoteCard(BuildContext context, int index) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ListTile(
+        title: Text('Nota ${index + 1}'),
+        subtitle: Text(_notas[index]),
+      ),
+    );
+  }
 }
 
-//eliminacion del drawer, modificacion 1
+
 
 class MiFAB extends StatelessWidget{
 
