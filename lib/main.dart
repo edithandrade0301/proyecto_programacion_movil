@@ -3,6 +3,7 @@ import 'package:proyecto_programacion_movil/crear/crearnota.dart';
 import 'package:proyecto_programacion_movil/crear/crearrecord.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:proyecto_programacion_movil/perfil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
               unselectedLabelColor: Colors.red[200],
               labelColor: const Color.fromARGB(255, 255, 170, 106),
               tabs: const [
-                Tab(text: 'Inf. Durante\nel Embarazo'),
-                Tab(text: 'Inf. Despues\ndel Embarazo'),
+                Tab(text: 'Informacion \n Durante el \n Embarazo'),
+                Tab(text: 'Informacion Despues del Embarazo'),
                 Tab(text: 'Calendario')
               ]),
           ),
@@ -66,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ]
           ),
+          drawer: const MiDrawer(),
           floatingActionButton: const MiFAB(),
         )
       )
@@ -106,7 +108,15 @@ class InfoDuranteTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
+            GestureDetector(
+              child: const Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Perfil())
+                );
+              }
+            ) //que redirija a una pagina blanca
           ]
         )
       )
@@ -158,7 +168,15 @@ class InfoDespuesTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
+            GestureDetector(
+              child: const Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Perfil())
+                );
+              }
+            ) //que redirija a una pagina blanca
           ]
         )
       )
@@ -182,7 +200,6 @@ class CalendarioTab extends StatefulWidget{
 
   @override
   _CalendarioTabState createState() => _CalendarioTabState();
-  
 }
 
 class _CalendarioTabState extends State<CalendarioTab>{
@@ -231,7 +248,63 @@ class _CalendarioTabState extends State<CalendarioTab>{
 //agregar cards de las notas creadas por el usuario
 }
 
-//eliminacion del drawer, modificacion 1
+class MiDrawer extends StatelessWidget{
+  const MiDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    return Drawer(
+      child: Container(
+        color: const Color.fromARGB(255, 243, 241, 241),
+        child: 
+          ListView( //eliminar el listvew y las 3 barritas
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+              decoration: BoxDecoration(
+              color: Colors.pink[50]
+              ),
+              child: const Text(
+              'Opciones',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)
+              )),
+              Container(
+                color: Colors.yellow[50],
+                child: 
+                ListTile(
+                  leading: const Icon(Icons.pending_actions_outlined),
+                  title: const Text('Recordatorio de Citas'),
+                  onTap: (){
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => const CrearRecordForm()));
+                  }
+                ),
+            ),
+          Container(
+            color: Colors.green[50],
+            child: 
+              const ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Chequeo de Estado'),
+            ),
+          ),
+          Container(
+            color: Colors.red[50],
+            child: 
+              const ListTile(
+              leading: Icon(Icons.meeting_room_sharp),
+              title: Text('Cerrar Sesion'),
+            )
+          )
+        ],
+      ),
+      )
+    );
+  }
+
+}
 
 class MiFAB extends StatelessWidget{
 
