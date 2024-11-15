@@ -3,6 +3,7 @@ import 'package:proyecto_programacion_movil/crear/crearnota.dart';
 import 'package:proyecto_programacion_movil/crear/crearrecord.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:proyecto_programacion_movil/perfil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -107,7 +108,15 @@ class InfoDuranteTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
+            GestureDetector(
+              child: const Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Perfil())
+                );
+              }
+            ) //que redirija a una pagina blanca
           ]
         )
       )
@@ -159,7 +168,15 @@ class InfoDespuesTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
+           GestureDetector(
+              child: const Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Perfil())
+                );
+              }
+            ) //que redirija a una pagina blanca
           ]
         )
       )
