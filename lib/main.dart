@@ -45,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
               unselectedLabelColor: Colors.red[200],
               labelColor: const Color.fromARGB(255, 255, 170, 106),
               tabs: const [
-                Tab(text: 'Informacion \n Durante el \n Embarazo'),
-                Tab(text: 'Informacion Despues del Embarazo'),
+                Tab(text: 'Inf. Durante\nel Embarazo'),
+                Tab(text: 'Inf. Despues\ndel Embarazo'),
                 Tab(text: 'Calendario')
               ]),
           ),
@@ -66,7 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ]
           ),
-          drawer: const MiDrawer(),
           floatingActionButton: const MiFAB(),
         )
       )
@@ -183,6 +182,7 @@ class CalendarioTab extends StatefulWidget{
 
   @override
   _CalendarioTabState createState() => _CalendarioTabState();
+  
 }
 
 class _CalendarioTabState extends State<CalendarioTab>{
@@ -231,63 +231,7 @@ class _CalendarioTabState extends State<CalendarioTab>{
 //agregar cards de las notas creadas por el usuario
 }
 
-class MiDrawer extends StatelessWidget{
-  const MiDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context){
-    return Drawer(
-      child: Container(
-        color: const Color.fromARGB(255, 243, 241, 241),
-        child: 
-          ListView( //eliminar el listvew y las 3 barritas
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-              decoration: BoxDecoration(
-              color: Colors.pink[50]
-              ),
-              child: const Text(
-              'Opciones',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)
-              )),
-              Container(
-                color: Colors.yellow[50],
-                child: 
-                ListTile(
-                  leading: const Icon(Icons.pending_actions_outlined),
-                  title: const Text('Recordatorio de Citas'),
-                  onTap: (){
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => const CrearRecordForm()));
-                  }
-                ),
-            ),
-          Container(
-            color: Colors.green[50],
-            child: 
-              const ListTile(
-              leading: Icon(Icons.camera_alt),
-              title: Text('Chequeo de Estado'),
-            ),
-          ),
-          Container(
-            color: Colors.red[50],
-            child: 
-              const ListTile(
-              leading: Icon(Icons.meeting_room_sharp),
-              title: Text('Cerrar Sesion'),
-            )
-          )
-        ],
-      ),
-      )
-    );
-  }
-
-}
+//eliminacion del drawer, modificacion 1
 
 class MiFAB extends StatelessWidget{
 
