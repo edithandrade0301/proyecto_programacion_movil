@@ -195,116 +195,100 @@ class InfoDespuesTab extends StatelessWidget{
   }
 }
 
-class CalendarioTab extends StatefulWidget{
+class CalendarioTab extends StatefulWidget {
   const CalendarioTab({super.key});
 
   @override
   _CalendarioTabState createState() => _CalendarioTabState();
 }
 
-class _CalendarioTabState extends State<CalendarioTab>{
+class _CalendarioTabState extends State<CalendarioTab> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  List<String> _notas = [];
 
   @override
-  Widget build(BuildContext context){ //desarrollo del calendario a futuro
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: 
-        TableCalendar(
-          firstDay: DateTime(DateTime.now().year, 1, 1),
-          lastDay: DateTime(DateTime.now().year + 2000, 12, 31),
-          focusedDay: _focusedDay,
-          calendarFormat: CalendarFormat.month,
-          startingDayOfWeek: StartingDayOfWeek.sunday,
-          onDaySelected: (selectedDay, focusedDay){
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-          },
-          selectedDayPredicate: (day){
-            return isSameDay(_selectedDay, day);
-          },
-          calendarStyle: CalendarStyle(
-            todayDecoration: BoxDecoration(
-              color: Colors.blue[200],
-              shape: BoxShape.circle
-            ),
-            selectedDecoration: BoxDecoration(
-              color: Colors.pink[200],
-              shape: BoxShape.circle,
-            )
-          ),
-          headerStyle: const HeaderStyle(
-            formatButtonVisible: false,
-            titleCentered: true,
-          ),
-        )
-      ),
-    );
+  void initState() {
+    super.initState();
+    //Esto a futuro usar la base de datos que dara el ing, solo para fines practicos ahora
+    _notas = [ //el tamaño del string indica cual es la cantidad de notas
+      'Revisión médica',
+      'Clase de preparación',
+      'Comprar artículos esenciales',
+      'Comprar artículos esencialesss'
+    ];
   }
-//agregar cards de las notas creadas por el usuario
-}
-
-class MiDrawer extends StatelessWidget{
-  const MiDrawer({super.key});
 
   @override
-  Widget build(BuildContext context){
-    return Drawer(
-      child: Container(
-        color: const Color.fromARGB(255, 243, 241, 241),
-        child: 
-          ListView( //eliminar el listvew y las 3 barritas
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-              decoration: BoxDecoration(
-              color: Colors.pink[50]
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Calendario con Notas"),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          // Calendario
+          TableCalendar(
+            firstDay: DateTime(DateTime.now().year, 1, 1),
+            lastDay: DateTime(DateTime.now().year + 5, 12, 31),
+            focusedDay: _focusedDay,
+            calendarFormat: CalendarFormat.month,
+            startingDayOfWeek: StartingDayOfWeek.sunday,
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+            },
+            selectedDayPredicate: (day) {
+              return isSameDay(_selectedDay, day);
+            },
+            calendarStyle: CalendarStyle(
+              todayDecoration: BoxDecoration(
+                color: Colors.blue[200],
+                shape: BoxShape.circle,
               ),
-              child: const Text(
-              'Opciones',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)
-              )),
-              Container(
-                color: Colors.yellow[50],
-                child: 
-                ListTile(
-                  leading: const Icon(Icons.pending_actions_outlined),
-                  title: const Text('Recordatorio de Citas'),
-                  onTap: (){
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => const CrearRecordForm()));
-                  }
-                ),
+              selectedDecoration: BoxDecoration(
+                color: Colors.pink[200],
+                shape: BoxShape.circle,
+              ),
             ),
-          Container(
-            color: Colors.green[50],
-            child: 
-              const ListTile(
-              leading: Icon(Icons.camera_alt),
-              title: Text('Chequeo de Estado'),
+            headerStyle: const HeaderStyle(
+              formatButtonVisible: false,
+              titleCentered: true,
             ),
           ),
-          Container(
-            color: Colors.red[50],
-            child: 
-              const ListTile(
-              leading: Icon(Icons.meeting_room_sharp),
-              title: Text('Cerrar Sesion'),
-            )
-          )
+          const SizedBox(height: 16),
+
+          // Lista de Notas
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              itemCount: _notas.length, // Cambiar por datos dinamicos de la base de datos en un futuro
+              itemBuilder: (BuildContext context, int index) {
+                return _buildNoteCard(context, index);
+              },
+            ),
+          ),
         ],
       ),
-      )
     );
   }
 
+  // Card de nota
+  Widget _buildNoteCard(BuildContext context, int index) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ListTile(
+        title: Text('Nota ${index + 1}'),
+        subtitle: Text(_notas[index]),
+      ),
+    );
+  }
 }
+
+//eliminacion del drawer, modificacion 1
 
 class MiFAB extends StatelessWidget{
 
