@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
               unselectedLabelColor: Colors.red[200],
               labelColor: const Color.fromARGB(255, 255, 170, 106),
               tabs: const [
-                Tab(text: 'Informacion Durante el Embarazo'),
+                Tab(text: 'Informacion \n Durante el \n Embarazo'),
                 Tab(text: 'Informacion Despues del Embarazo'),
                 Tab(text: 'Calendario')
               ]),
@@ -78,7 +78,7 @@ class InfoDuranteTab extends StatelessWidget{
   const InfoDuranteTab({super.key});
 
   Widget getInfo(BuildContext context, int index){
-    return Card(
+    return Card( //cambiar la card por la de edith incluyendo el $index
       child: Padding(
         padding: const EdgeInsets.all(8),
         child:
@@ -107,7 +107,7 @@ class InfoDuranteTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward)
+            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
           ]
         )
       )
@@ -118,7 +118,7 @@ class InfoDuranteTab extends StatelessWidget{
   Widget build(BuildContext context){
     return ListView.builder(
       padding: const EdgeInsets.all(1),
-      itemCount: 12,
+      itemCount: 12,// a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
       itemBuilder: (BuildContext context, int index){
         return getInfo(context, index+1);
       },
@@ -130,7 +130,7 @@ class InfoDespuesTab extends StatelessWidget{
   const InfoDespuesTab({super.key});
 
   Widget getInfo(BuildContext context, int index){
-    return Card(
+    return Card(//cambiar la card por la de edith incluyendo el $index
       child: Padding(
         padding: const EdgeInsets.all(8),
         child:
@@ -159,7 +159,7 @@ class InfoDespuesTab extends StatelessWidget{
                 )
               ],
             ),
-            const Icon(Icons.arrow_forward)
+            const Icon(Icons.arrow_forward) //que redirija a una pagina blanca
           ]
         )
       )
@@ -170,7 +170,7 @@ class InfoDespuesTab extends StatelessWidget{
   Widget build(BuildContext context){
     return ListView.builder(
       padding: const EdgeInsets.all(1),
-      itemCount: 12,
+      itemCount: 12, // a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
       itemBuilder: (BuildContext context, int index){
         return getInfo(context, index+1);
       }
@@ -190,7 +190,7 @@ class _CalendarioTabState extends State<CalendarioTab>{
   DateTime? _selectedDay;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context){ //desarrollo del calendario a futuro
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -228,7 +228,7 @@ class _CalendarioTabState extends State<CalendarioTab>{
       ),
     );
   }
-
+//agregar cards de las notas creadas por el usuario
 }
 
 class MiDrawer extends StatelessWidget{
@@ -240,7 +240,7 @@ class MiDrawer extends StatelessWidget{
       child: Container(
         color: const Color.fromARGB(255, 243, 241, 241),
         child: 
-          ListView(
+          ListView( //eliminar el listvew y las 3 barritas
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
@@ -295,7 +295,7 @@ class MiFAB extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return SpeedDial(
+    return SpeedDial( //dejar solo la opcion de la camara
       icon: Icons.add,
       buttonSize: const Size(50, 50),
       activeIcon: Icons.close,
