@@ -67,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ]
           ),
-          drawer: const MiDrawer(),
           floatingActionButton: const MiFAB(),
         )
       )
