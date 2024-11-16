@@ -4,6 +4,7 @@ import 'package:proyecto_programacion_movil/crear/crearrecord.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:proyecto_programacion_movil/perfiles/perfil.dart';
+import 'package:proyecto_programacion_movil/perfiles/perfildos.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -200,7 +201,7 @@ class InfoDespuesTab extends StatelessWidget {
                   child: const Icon(Icons.arrow_forward),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Perfil()));
+                        MaterialPageRoute(builder: (context) => const Perfildos()));
                   }
                 ) //que redirija a una pagina blanca
             ]
