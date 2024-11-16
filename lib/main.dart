@@ -232,7 +232,7 @@ class _CalendarioTabState extends State<CalendarioTab> {
           TableCalendar(
             firstDay: DateTime(DateTime.now().year, 1, 1),
             lastDay: DateTime(DateTime.now().year + 5, 12, 31),
-            focusedDay: _focusedDay,
+            focusedDay: _focusedDay, //coloca el circulo en el dia actual
             calendarFormat: CalendarFormat.month,
             startingDayOfWeek: StartingDayOfWeek.sunday,
             onDaySelected: (selectedDay, focusedDay) {
