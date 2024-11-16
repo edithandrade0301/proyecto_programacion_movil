@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(title: 'Nombre de la Aplicacion'),
+      home: MyHomePage(title: ''),
     );
   }
 }
@@ -32,166 +32,193 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
-      home: DefaultTabController(
-        length: 3, 
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(widget.title),
-            centerTitle: true,
-            backgroundColor: Colors.green[50],
-            bottom: TabBar(
-              indicatorColor: Colors.lightBlue[600],
-              unselectedLabelColor: Colors.red[200],
-              labelColor: const Color.fromARGB(255, 255, 170, 106),
-              tabs: const [        
-                Tab(text: 'Inf. Durante\nel Embarazo'),
-                Tab(text: 'Inf. Despues\ndel Embarazo'),
-
-                Tab(text: 'Calendario')
-              ]),
-          ),
-          body: TabBarView(
-            children: [
-              Container(
-                color: Colors.lightBlue[50],
-                child: InfoDuranteTab(),
+        home: DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(widget.title),
+                centerTitle: true,
+                backgroundColor: const Color.fromARGB(255, 240, 170, 216),
+                bottom: const TabBar(
+                    indicatorColor:  Color.fromARGB(255, 221, 19, 154),
+                    unselectedLabelColor:  Color.fromARGB(255, 104, 4, 79),
+                    labelColor:  Color.fromARGB(255, 202, 41, 175),
+                    tabs: [
+                      Tab(text: 'Inf. Durante\nel Embarazo'),
+                      Tab(text: 'Inf. Después\ndel Embarazo'),
+                      Tab(text: 'Calendario')
+                    ]
+                  ),
               ),
-              Container(
-                color: Colors.pink[50],
-                child: InfoDespuesTab(),
-              ),
-              Container(
-                color: Colors.yellow[50],
-                child: CalendarioTab()
-              )
-            ]
-          ),
-          floatingActionButton: const MiFAB(),
-        )
-      )
-    );
+              body: TabBarView(children: [
+                Container(
+                  color: Colors.pink[50],
+                  child: const InfoDuranteTab(),
+                ),
+                Container(
+                  color: Colors.lightBlue[50],
+                  child: const InfoDespuesTab(),
+                ),
+                Container(color: Colors.yellow[50], child: const CalendarioTab())
+              ]
+            ),
+              floatingActionButton: const MiFAB(),
+            )
+          )
+        );
   }
 }
 
-class InfoDuranteTab extends StatelessWidget{
+class InfoDuranteTab extends StatelessWidget {
   const InfoDuranteTab({super.key});
 
-  Widget getInfo(BuildContext context, int index){
-    return Card( //cambiar la card por la de edith incluyendo el $index
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child:
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                const Image(
-                  image: NetworkImage('https://i.pinimg.com/236x/32/5a/37/325a37769e88d1414d5ce1343f732024.jpg'),
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover),
-                  const SizedBox(width: 20),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Mes $index'
+  Widget getInfo(BuildContext context, int index) {
+    return Card(
+        //cambiar la card por la de edith incluyendo el $index
+        margin: const EdgeInsets.symmetric(
+            horizontal: 16, vertical: 8), // Espaciado entre tarjetas
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15), // Bordes redondeados
+        ),
+        elevation: 4, // Sombra
+        child: Padding(
+            padding: const EdgeInsets.all(16), // Espacio interno
+            child:
+                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              // Imagen
+              const Image(
+                image: NetworkImage(
+                    'https://i.pinimg.com/236x/32/5a/37/325a37769e88d1414d5ce1343f732024.jpg'),
+                height: 110,
+                width: 70,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(width: 16), // Espacio entre la imagen y el texto
+              // Texto en una columna
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mes $index',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                      const SizedBox(height: 3),
-                      const Text(
-                        'Lorem Epsum Indicare'
+                    const SizedBox(
+                        height: 8), // Espacio entre título y descripción
+                    const Text(
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                      style: TextStyle(fontSize: 14),
+                      softWrap: true, // Permite saltos de línea automáticos
+                      overflow: TextOverflow.clip, // Evita cortes de texto
+                      textAlign: TextAlign.justify, // Texto justificado
                     ),
                   ],
-                )
-              ],
-            ),
-            GestureDetector(
-              child: const Icon(Icons.arrow_forward),
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Perfil())
-                );
-              }
-            ) //que redirija a una pagina blanca
-          ]
+                ),
+              ),
+              const SizedBox(width: 16),
+              GestureDetector(
+                  child: const Icon(Icons.arrow_forward),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Perfil()));
+                  }
+                ) //que redirija a una pagina blanca
+            ]
+          )
         )
-      )
-    );
+      );
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(1),
-      itemCount: 12,// a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
-      itemBuilder: (BuildContext context, int index){
-        return getInfo(context, index+1);
+      itemCount:
+          9, // a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
+      itemBuilder: (BuildContext context, int index) {
+        return getInfo(context, index + 1);
       },
     );
   }
 }
 
-class InfoDespuesTab extends StatelessWidget{
+class InfoDespuesTab extends StatelessWidget {
   const InfoDespuesTab({super.key});
 
-  Widget getInfo(BuildContext context, int index){
-    return Card(//cambiar la card por la de edith incluyendo el $index
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child:
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                const Image(
-                  image: NetworkImage('https://i.pinimg.com/236x/32/5a/37/325a37769e88d1414d5ce1343f732024.jpg'),
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover),
-                  const SizedBox(width: 20),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tema del Embarazo $index'
+  Widget getInfo(BuildContext context, int index) {
+    return Card(
+        //cambiar la card por la de edith incluyendo el $index
+        margin: const EdgeInsets.symmetric(
+            horizontal: 16, vertical: 8), // Espaciado entre tarjetas
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15), // Bordes redondeados
+        ),
+        elevation: 4, // Sombra
+        child: Padding(
+            padding: const EdgeInsets.all(16), // Espacio interno
+            child:
+                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              // Imagen
+              const Image(
+                image: NetworkImage(
+                    'https://i.pinimg.com/236x/32/5a/37/325a37769e88d1414d5ce1343f732024.jpg'),
+                height: 110,
+                width: 70,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(width: 16), // Espacio entre la imagen y el texto
+              // Texto en una columna
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'TEMA $index',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                      const SizedBox(height: 3),
-                      const Text(
-                        'Lorem Epsum Indicare'
+                    const SizedBox(
+                        height: 8), // Espacio entre título y descripción
+                    const Text(
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                      style: TextStyle(fontSize: 14),
+                      softWrap: true, // Permite saltos de línea automáticos
+                      overflow: TextOverflow.clip, // Evita cortes de texto
+                      textAlign: TextAlign.justify, // Texto justificado
                     ),
                   ],
-                )
-              ],
-            ),
-           GestureDetector(
-              child: const Icon(Icons.arrow_forward),
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Perfil())
-                );
-              }
-            ) //que redirija a una pagina blanca
-          ]
+                ),
+              ),
+              const SizedBox(width: 16),
+              GestureDetector(
+                  child: const Icon(Icons.arrow_forward),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Perfil()));
+                  }
+                ) //que redirija a una pagina blanca
+            ]
+          )
         )
-      )
-    );
+      );
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(1),
-      itemCount: 12, // a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
-      itemBuilder: (BuildContext context, int index){
-        return getInfo(context, index+1);
-      }
-    );
+        padding: const EdgeInsets.all(1),
+        itemCount: 4, // a futuro se cambiara por el lenght de la base de datos (la tabla que contenga la info correspondiente)
+        itemBuilder: (BuildContext context, int index) {
+          return getInfo(context, index + 1);
+        }
+      );
   }
 }
 
@@ -211,7 +238,8 @@ class _CalendarioTabState extends State<CalendarioTab> {
   void initState() {
     super.initState();
     //Esto a futuro usar la base de datos que dara el ing, solo para fines practicos ahora
-    _notas = [ //el tamaño del string indica cual es la cantidad de notas
+    _notas = [
+      //el tamaño del string indica cual es la cantidad de notas
       'Revisión médica',
       'Clase de preparación',
       'Comprar artículos esenciales',
@@ -267,7 +295,7 @@ class _CalendarioTabState extends State<CalendarioTab> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               itemCount: _notas.length, // Cambiar por datos dinamicos de la base de datos en un futuro
               itemBuilder: (BuildContext context, int index) {
-                return _buildNoteCard(context, index);
+                return _buildNoteCard(context, index+1);
               },
             ),
           ),
@@ -279,71 +307,132 @@ class _CalendarioTabState extends State<CalendarioTab> {
   // Card de nota
   Widget _buildNoteCard(BuildContext context, int index) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        title: Text('Nota ${index + 1}'),
-        subtitle: Text(_notas[index]),
-      ),
-    );
+        //cambiar la card por la de edith incluyendo el $index
+        margin: const EdgeInsets.symmetric(vertical: 8), // Espaciado entre tarjetas
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15), // Bordes redondeados
+        ),
+        elevation: 4, // Sombra
+        child: Padding(
+            padding: const EdgeInsets.all(16), // Espacio interno
+            child:
+                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              // Imagen
+              const Image(
+                image: NetworkImage(
+                    'https://i.pinimg.com/236x/32/5a/37/325a37769e88d1414d5ce1343f732024.jpg'),
+                height: 50,
+                width: 50,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(width: 16), // Espacio entre la imagen y el texto
+              // Texto en una columna
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'TITULO $index',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'nombre del doctor',
+                      style: TextStyle(fontSize: 14),
+                      softWrap: true, // Permite saltos de línea automáticos
+                      overflow: TextOverflow.clip, // Evita cortes de texto
+                      textAlign: TextAlign.justify, // Texto justificado
+                    ),
+
+                    
+                    const Text(
+                      'hora establecida',
+                      style: TextStyle(fontSize: 14),
+                      softWrap: true, // Permite saltos de línea automáticos
+                      overflow: TextOverflow.clip, // Evita cortes de texto
+                      textAlign: TextAlign.justify, // Texto justificado
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              GestureDetector(
+                  child: const Icon(Icons.remove_red_eye),
+                  onTap: () {
+                   // Navigator.push(context,
+                        //MaterialPageRoute(builder: (context) => const Perfil()));
+                  }
+                ), //que redirija a una pagina blanca de ojito
+
+                const SizedBox(width: 30),
+              GestureDetector(
+                  child: const Icon(Icons.arrow_forward),
+                  onTap: () {
+                   // Navigator.push(context,
+                       // MaterialPageRoute(builder: (context) => const Perfil()));
+                  }
+                )
+            ]
+          )
+        )
+      );
   }
 }
 
-
-
-class MiFAB extends StatelessWidget{
-
+class MiFAB extends StatelessWidget {
   const MiFAB({super.key});
 
   @override
-  Widget build(BuildContext context){
-    return SpeedDial( //dejar solo la opcion de la camara
-      icon: Icons.add,
-      buttonSize: const Size(50, 50),
-      activeIcon: Icons.close,
-      visible: true,
-      children: [
-        SpeedDialChild(
-          child: const Icon(Icons.photo_camera),
-          labelWidget: const Text(
-            'Chequeo de Estado',
-            style: TextStyle(fontSize: 20),
-          ),
-          /*onTap: (){
+  Widget build(BuildContext context) {
+    return SpeedDial(
+        //dejar solo la opcion de la camara
+        icon: Icons.add,
+        buttonSize: const Size(50, 50),
+        activeIcon: Icons.close,
+        visible: true,
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.photo_camera),
+            labelWidget: const Text(
+              'Chequeo de Estado',
+              style: TextStyle(fontSize: 20),
+            ),
+            /*onTap: (){
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const CrearNotaForm()));
           }*/
-        ),
-        SpeedDialChild(
-          child: const Icon(Icons.pending_actions),
-          labelWidget: const Text(
-            'Crear Recordatorio de Cita',
-            style: TextStyle(fontSize: 20),
           ),
-          onTap: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CrearRecordForm()));
-          }
-        ),
-        SpeedDialChild(
-          child: const Icon(Icons.edit),
-          labelWidget: const Text(
-            'Crear Nota de Cuidado',
-            style: TextStyle(fontSize: 20),
-          ),
-          onTap: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CrearNotaForm()
-              )
-            );
-          }
-        )
-      ]
-    );
+          SpeedDialChild(
+              child: const Icon(Icons.pending_actions),
+              labelWidget: const Text(
+                'Crear Recordatorio de Cita',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CrearRecordForm()));
+              }
+            ),
+          SpeedDialChild(
+              child: const Icon(Icons.edit),
+              labelWidget: const Text(
+                'Crear Nota de Cuidado',
+                style: TextStyle(fontSize: 20),
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CrearNotaForm()));
+              }
+            )
+        ]
+      );
   }
 }
