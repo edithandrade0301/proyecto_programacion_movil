@@ -201,7 +201,7 @@ class InfoDespuesTab extends StatelessWidget {
                   child: const Icon(Icons.arrow_forward),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Perfildos()));
+                        MaterialPageRoute(builder: (context) => const Perfil()));
                   }
                 ) //que redirija a una pagina blanca
             ]
