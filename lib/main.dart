@@ -4,7 +4,7 @@ import 'package:proyecto_programacion_movil/crear/crearrecord.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:proyecto_programacion_movil/perfiles/perfil.dart';
-
+import 'package:proyecto_programacion_movil/perfiles/perfil2.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -46,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     unselectedLabelColor:  Color.fromARGB(255, 104, 4, 79),
                     labelColor:  Color.fromARGB(255, 202, 41, 175),
                     tabs: [
-                      Tab(text: 'Inf. Durante\nel Embarazo'),
-                      Tab(text: 'Inf. Después\ndel Embarazo'),
+                      Tab(text: '    Durante\nel Embarazo'),
+                      Tab(text: '    Después\ndel Embarazo'),
                       Tab(text: 'Calendario')
                     ]
                   ),
@@ -201,7 +201,7 @@ class InfoDespuesTab extends StatelessWidget {
                   child: const Icon(Icons.arrow_forward),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Perfil()));
+                        MaterialPageRoute(builder: (context) => const Perfil2()));
                   }
                 ) //que redirija a una pagina blanca
             ]
