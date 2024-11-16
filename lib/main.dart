@@ -3,7 +3,7 @@ import 'package:proyecto_programacion_movil/crear/crearnota.dart';
 import 'package:proyecto_programacion_movil/crear/crearrecord.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:proyecto_programacion_movil/perfil.dart';
+import 'package:proyecto_programacion_movil/perfiles/perfil.dart';
 
 void main() {
   runApp(const MyApp());
